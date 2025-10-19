@@ -1,0 +1,23 @@
+{% extends "admin/base_admin.html" %}
+{% block content %}
+<h2>Añadir Nuevo Horario</h2>
+<form method="POST">
+    <label>Día de la semana:</label>
+    <select name="dia" required>
+        <option value="">-- Selecciona --</option>
+        <option value="0">Lunes</option>
+        <option value="1">Martes</option>
+        <option value="2">Miércoles</option>
+        <option value="3">Jueves</option>
+        <option value="4">Viernes</option>
+        <option value="5">Sábado</option>
+        <option value="6">Domingo</option>
+    </select>
+    <label>Hora de apertura (HH:MM):</label>
+    <input type="text" name="apertura" required placeholder="Ej: 12:00">
+    <label>Hora de cierre (HH:MM):</label>
+    <input type="text" name="cierre" required placeholder="Ej: 22:00">
+    <button type="submit">Crear Horario</button>
+</form>
+<a href="{{ url_for('main.admin_horarios') }}">← Volver</a>
+{% endblock %}

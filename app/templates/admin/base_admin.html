@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Panel Admin - Reservas</title>
+    <style>
+        body { font-family: Arial; margin: 20px; }
+        .menu { margin-bottom: 20px; }
+        .menu a { margin-right: 15px; text-decoration: none; color: #0066cc; }
+        .error { color: red; }
+        input, button { padding: 6px; margin: 4px 0; display: block; }
+    </style>
+</head>
+<body>
+    <div class="menu">
+        <a href="{{ url_for('main.admin_panel') }}">Mesas</a>
+        <a href="{{ url_for('main.admin_horarios') }}">Horarios</a>
+        <a href="{{ url_for('main.logout') }}">Salir</a>
+    </div>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="error">
+                {% for msg in messages %}{{ msg }}<br>{% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+    <div class="menu">
+    <a href="{{ url_for('main.admin_panel') }}">Mesas</a>
+    <a href="{{ url_for('main.admin_horarios') }}">Horarios</a>
+    <a href="{{ url_for('main.admin_reservas') }}">Reservas</a>  <!-- 👈 NUEVO -->
+    <a href="{{ url_for('main.logout') }}">Salir</a>
+</div>
+
+</body>
+</html>

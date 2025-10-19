@@ -1,0 +1,18 @@
+{% extends "admin/base_admin.html" %}
+{% block content %}
+<h2>Gestión de Mesas</h2>
+<a href="{{ url_for('main.admin_nueva_mesa') }}">+ Añadir nueva mesa</a>
+<br><br>
+<table border="1" cellpadding="8">
+    <tr>
+        <th>Número</th>
+        <th>Capacidad</th>
+    </tr>
+    {% for mesa in mesas %}
+    <tr>
+        <td>{{ mesa.numero }}</td>
+        <td>{{ mesa.capacidad }} personas</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

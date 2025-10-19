@@ -1,0 +1,12 @@
+{% extends "admin/base_admin.html" %}
+{% block content %}
+<h2>Añadir Nueva Mesa</h2>
+<form method="POST">
+    <label>Número o nombre de la mesa:</label>
+    <input type="text" name="numero" required placeholder="Ej: Mesa 5, Terraza A">
+    <label>Capacidad (personas):</label>
+    <input type="number" name="capacidad" min="1" max="20" required>
+    <button type="submit">Crear Mesa</button>
+</form>
+<a href="{{ url_for('main.admin_panel') }}">← Volver</a>
+{% endblock %}

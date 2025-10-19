@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Seleccionar Mesa</title>
+    <style>
+        body { font-family: Arial; margin: 40px; }
+        table { border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ccc; padding: 10px; }
+        .error { color: red; }
+    </style>
+</head>
+<body>
+    <h2>Mesas disponibles el {{ fecha }} a las {{ hora }}</h2>
+    
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="error">{% for msg in messages %}{{ msg }}<br>{% endfor %}</div>
+        {% endif %}
+    {% endwith %}
+
+    {% if mesas %}
+        <form method="POST" action="{{ url_for('main.cliente_confirmar_reserva') }}">
+            <input type="hidden" name="fecha" value="{{ fecha }}">
+            <input type="hidden" name="hora" value="{{ hora }}">
+            <table>
+                <tr>
+                    <th>Seleccionar</th>
+                    <th>Mesa</th>
+                    <th>Capacidad</th>
+                </tr>
+                {% for mesa in mesas %}
+                <tr>
+                    <td><input type="radio" name="mesa_id" value="{{ mesa.id }}" required></td>
+                    <td>{{ mesa.numero }}</td>
+                    <td>{{ mesa.capacidad }} personas</td>
+                </tr>
+                {% endfor %}
+            </table>
+            <br>
+            <button type="submit">Confirmar Reserva</button>
+        </form>
+    {% else %}
+        <p>No hay mesas disponibles en ese horario.</p>
+    {% endif %}
+
+    <br>
+    <a href="{{ url_for('main.cliente_reservar') }}">← Cambiar fecha/hora</a>
+    <a href="/logout">Salir</a>
+</body>
+</html>

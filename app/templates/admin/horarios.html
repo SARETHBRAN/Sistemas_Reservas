@@ -1,0 +1,20 @@
+{% extends "admin/base_admin.html" %}
+{% block content %}
+<h2>Gestión de Horarios</h2>
+<a href="{{ url_for('main.admin_nuevo_horario') }}">+ Añadir nuevo horario</a>
+<br><br>
+<table border="1" cellpadding="8">
+    <tr>
+        <th>Día</th>
+        <th>Apertura</th>
+        <th>Cierre</th>
+    </tr>
+    {% for h in horarios %}
+    <tr>
+        <td>{{ h.dia_semana | dia_nombre }}</td>
+        <td>{{ h.hora_apertura }}</td>
+        <td>{{ h.hora_cierre }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

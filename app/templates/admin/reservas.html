@@ -1,0 +1,33 @@
+{% extends "admin/base_admin.html" %}
+{% block content %}
+<h2>Reservas</h2>
+<table border="1" cellpadding="8" style="width:100%; border-collapse: collapse;">
+    <tr>
+        <th>Cliente</th>
+        <th>Mesa</th>
+        <th>Fecha</th>
+        <th>Hora</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+    </tr>
+    {% for r in reservas %}
+    <tr>
+        <td>{{ r.usuario.nombre }}</td>
+        <td>{{ r.mesa.numero }}</td>
+        <td>{{ r.fecha }}</td>
+        <td>{{ r.hora }}</td>
+        <td>{{ r.estado }}</td>
+        <td>
+            {% if r.estado == 'pendiente' %}
+                <a href="{{ url_for('main.admin_cambiar_estado', reserva_id=r.id, nuevo_estado='atendida') }}"
+                   style="color:green; margin-right:10px;">✓ Atender</a>
+                <a href="{{ url_for('main.admin_cambiar_estado', reserva_id=r.id, nuevo_estado='cancelada') }}"
+                   style="color:red;">✗ Cancelar</a>
+            {% else %}
+                {{ r.estado }}
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
