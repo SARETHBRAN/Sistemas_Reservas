@@ -1,20 +1,43 @@
 {% extends "admin/base_admin.html" %}
 {% block content %}
-<h2>Gestión de Horarios</h2>
-<a href="{{ url_for('main.admin_nuevo_horario') }}">+ Añadir nuevo horario</a>
-<br><br>
-<table border="1" cellpadding="8">
-    <tr>
-        <th>Día</th>
-        <th>Apertura</th>
-        <th>Cierre</th>
-    </tr>
-    {% for h in horarios %}
-    <tr>
-        <td>{{ h.dia_semana | dia_nombre }}</td>
-        <td>{{ h.hora_apertura }}</td>
-        <td>{{ h.hora_cierre }}</td>
-    </tr>
-    {% endfor %}
-</table>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">Gestión de Horarios</h5>
+                <a href="{{ url_for('main.admin_nuevo_horario') }}" class="btn btn-sm btn-primary">
+                    <i class="fas fa-plus"></i> Añadir nuevo horario
+                </a>
+            </div>
+            <div class="card-body">
+                {% if horarios %}
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Día</th>
+                                    <th>Apertura</th>
+                                    <th>Cierre</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for h in horarios %}
+                                <tr>
+                                    <td>{{ h.dia_semana | dia_nombre }}</td>
+                                    <td>{{ h.hora_apertura }}</td>
+                                    <td>{{ h.hora_cierre }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <div class="alert alert-info">
+                        No hay horarios definidos. ¡Configura el primer día!
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

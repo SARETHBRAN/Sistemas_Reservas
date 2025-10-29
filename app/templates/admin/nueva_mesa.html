@@ -1,12 +1,38 @@
 {% extends "admin/base_admin.html" %}
 {% block content %}
-<h2>Añadir Nueva Mesa</h2>
-<form method="POST">
-    <label>Número o nombre de la mesa:</label>
-    <input type="text" name="numero" required placeholder="Ej: Mesa 5, Terraza A">
-    <label>Capacidad (personas):</label>
-    <input type="number" name="capacidad" min="1" max="20" required>
-    <button type="submit">Crear Mesa</button>
-</form>
-<a href="{{ url_for('main.admin_panel') }}">← Volver</a>
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0"><i class="fas fa-chair icon"></i> Añadir Nueva Mesa</h5>
+                <a href="{{ url_for('main.admin_panel') }}" class="btn btn-sm btn-outline-secondary">
+                    ← Volver
+                </a>
+            </div>
+            <div class="card-body">
+                <form method="POST">
+                    <div class="mb-3">
+                        <label for="numero" class="form-label">Número o nombre de la mesa</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-hashtag"></i></span>
+                            <input type="text" class="form-control" id="numero" name="numero" placeholder="Ej: Mesa 5, Terraza A" required>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="capacidad" class="form-label">Capacidad (personas)</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-users"></i></span>
+                            <input type="number" class="form-control" id="capacidad" name="capacidad" min="1" max="20" value="4" required>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary w-100">
+                        <i class="fas fa-plus"></i> Crear Mesa
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

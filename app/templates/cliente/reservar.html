@@ -1,31 +1,47 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>Reservar Mesa</title>
-    <style>
-        body { font-family: Arial; margin: 40px; }
-        input, button { padding: 8px; margin: 5px 0; }
-        .error { color: red; }
-    </style>
-</head>
-<body>
-    <h2>Reservar Mesa</h2>
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <div class="error">
-                {% for msg in messages %}{{ msg }}<br>{% endfor %}
+{% extends "base.html" %}
+{% block title %}Reservar Mesa{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0"><i class="fas fa-calendar-check icon"></i> Reservar Mesa</h4>
             </div>
-        {% endif %}
-    {% endwith %}
+            <div class="card-body">
+                {% if messages %}
+                    <div class="alert alert-danger">
+                        {% for msg in messages %}{{ msg }}<br>{% endfor %}
+                    </div>
+                {% endif %}
 
-    <form method="POST">
-        <label>Fecha:</label>
-        <input type="date" name="fecha" min="{{ hoy }}" required>
-        <label>Hora (HH:MM):</label>
-        <input type="text" name="hora" placeholder="Ej: 19:30" required pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]">
-        <button type="submit">Ver Mesas Disponibles</button>
-    </form>
-    <a href="/logout">Salir</a>
-</body>
-</html>
+                <form method="POST">
+                    <div class="mb-3">
+                        <label for="fecha" class="form-label">Fecha</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                            <input type="date" class="form-control" id="fecha" name="fecha" min="{{ hoy }}" required>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="hora" class="form-label">Hora (HH:MM)</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="far fa-clock"></i></span>
+                            <input type="text" class="form-control" id="hora" name="hora" placeholder="Ej: 19:30" required pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100">
+                        <i class="fas fa-search"></i> Ver Mesas Disponibles
+                    </button>
+                </form>
+            </div>
+            <div class="card-footer">
+                <a href="/logout" class="btn btn-outline-danger btn-sm">
+                    <i class="fas fa-sign-out-alt"></i> Salir
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

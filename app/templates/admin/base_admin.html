@@ -4,19 +4,54 @@
     <meta charset="utf-8">
     <title>Panel Admin - Reservas</title>
     <style>
-        body { font-family: Arial; margin: 20px; }
-        .menu { margin-bottom: 20px; }
-        .menu a { margin-right: 15px; text-decoration: none; color: #0066cc; }
-        .error { color: red; }
-        input, button { padding: 6px; margin: 4px 0; display: block; }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            margin: 20px; 
+            background-color: #f8f9fa;
+        }
+        .menu { 
+            display: flex; 
+            gap: 15px; 
+            margin-bottom: 20px; 
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .menu a { 
+            text-decoration: none; 
+            color: #0d6efd; 
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .menu a:hover { 
+            background: #0d6efd; 
+            color: white; 
+        }
+        .error { 
+            color: #dc3545; 
+            background: #f8d7da; 
+            padding: 10px; 
+            border-radius: 8px; 
+            margin-bottom: 15px;
+        }
+        input, button { 
+            padding: 8px; 
+            margin: 5px 0; 
+            display: block; 
+        }
     </style>
 </head>
 <body>
     <div class="menu">
-        <a href="{{ url_for('main.admin_panel') }}">Mesas</a>
-        <a href="{{ url_for('main.admin_horarios') }}">Horarios</a>
-        <a href="{{ url_for('main.logout') }}">Salir</a>
+        <a href="{{ url_for('main.admin_panel') }}"><i class="fas fa-chair"></i> Mesas</a>
+        <a href="{{ url_for('main.admin_horarios') }}"><i class="fas fa-clock"></i> Horarios</a>
+        <a href="{{ url_for('main.admin_reservas') }}"><i class="fas fa-list"></i> Reservas</a>
+        <a href="{{ url_for('main.logout') }}"><i class="fas fa-sign-out-alt"></i> Salir</a>
     </div>
+
     {% with messages = get_flashed_messages() %}
         {% if messages %}
             <div class="error">
@@ -24,13 +59,7 @@
             </div>
         {% endif %}
     {% endwith %}
-    {% block content %}{% endblock %}
-    <div class="menu">
-    <a href="{{ url_for('main.admin_panel') }}">Mesas</a>
-    <a href="{{ url_for('main.admin_horarios') }}">Horarios</a>
-    <a href="{{ url_for('main.admin_reservas') }}">Reservas</a>  <!-- 👈 NUEVO -->
-    <a href="{{ url_for('main.logout') }}">Salir</a>
-</div>
 
+    {% block content %}{% endblock %}
 </body>
 </html>
